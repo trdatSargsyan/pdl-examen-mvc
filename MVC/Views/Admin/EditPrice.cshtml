@@ -1,0 +1,58 @@
+﻿@model MVC.Models.PriceDto
+
+@{
+    ViewData["Title"] = "EditPrice";
+}
+<style>
+    .col-1 a {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+</style>
+
+<div class="container">
+    <h2>Edit Price</h2>
+    <form asp-action="EditPrice">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col">
+                    <input asp-for="FormulePriceId" class="form-control" type="hidden" />
+                    <div class="form-group">
+                        <label asp-for="CarId" class="control-label">Car Id</label>
+                        <input asp-for="CarId" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label">Price/Day</label>
+                        <input asp-for="PriceDay" class="form-control" />
+                        <span asp-validation-for="PriceDay" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label">Price/Week</label>
+                        <input asp-for="PriceWeek" class="form-control" />
+                        <span asp-validation-for="PriceWeek" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col-2">
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+                <div class="col-1">
+                    <a href='javascript:history.go(-1)' class="btn btn-outline-secondary">Back</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

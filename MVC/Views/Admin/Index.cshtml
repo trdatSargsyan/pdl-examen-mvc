@@ -1,0 +1,114 @@
+﻿@using MVC
+@model dynamic
+
+<link rel="stylesheet" href="~/css/indexAdmin.css"/>
+
+<style>
+    table {
+        font-size:12px;
+    }
+</style>
+
+<div class="container">
+    <h2>Admin</h2>
+    <div class="row">
+        <div class="col-sm-4 pb-2">
+            <a asp-action="PostCountry" class="btn btn-outline-success"><i class="bi bi-globe me-1"></i> Add Country</a>
+        </div>
+        <div class="col-sm-4 ">
+            <a asp-action="PostTypeOfCar" class="btn btn-outline-success"><i class="bi bi-car-front-fill me-1"></i> Add Type of Car</a>
+        </div>
+        <div class="col-sm-2 ">
+            <a asp-action="PostMotor" class="btn btn-outline-success"><i class="bi bi-gear me-1"></i> Add Motor</a>
+        </div>
+    </div>
+</div>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <table class="table table-sm  table-hover" style="background-color:#D3D3D3">
+                    <thead class="table-dark">
+                        <tr>
+                            <th style="width: 6%">Id</th>
+                            <th style="width: 20%">Name</th>
+                            <th style="width: 54%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Country i in Model.Countries)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(m => i.Id)</td>
+                                <td>@Html.DisplayFor(m => i.Name)</td>
+                                <td>
+                                    <a asp-action="GetAeroports"  asp-route-Id="@i.Id" class="btn btn-primary btn-sm me-2 mb-1"><i class="bi bi-airplane me-1"></i> Aeropoprts</a>
+                                    <a asp-action="EditCountry"   asp-route-Id="@i.Id" class="btn btn-warning btn-sm me-2 mb-1"><i class="bi bi-pen me-1"></i> Edit</a>
+                                    <a asp-action="DeleteCountry" asp-route-Id="@i.Id" class="btn btn-danger btn-sm mb-1"><i class="bi bi-trash  me-3 ms-3"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-4">
+                <table class="table table-sm table-hover" style="background-color:#D3D3D3">
+                    <thead class="table-dark">
+                        <tr>
+                            <th style="width: 10%">Id</th>
+                            <th style="width: 15%">Type</th>
+                            <th style="width: 35%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (TypeOfCarDto i in Model.TypesOfCars)
+                        {
+                            <tr>
+                                <td>@i.TypeOfCarId</td>
+                                <td>@i.Type</td>
+                                <td >
+                                    <a asp-action="GetCarsByType" asp-route-Id="@i.TypeOfCarId" class="btn btn-primary btn-sm me-2 mb-1"><i class="bi bi-car-front-fill me-1"></i> Cars</a>
+                                    <a asp-action="EditTypeOfCar" asp-route-Id="@i.TypeOfCarId" class="btn btn-warning btn-sm me-2 mb-1"><i class="bi bi-pen me-1"></i> Edit</a>
+                                    <a asp-action="DeleteTypeOfCar" asp-route-Id="@i.TypeOfCarId" class="btn btn-danger btn-sm mb-1"><i class="bi bi-trash me-3 ms-3"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-4">
+                <table class="table table-sm table-hover" style="background-color:#D3D3D3">
+                    <thead class="table-dark">
+                        <tr>
+                            <th style="width: 10%">Id</th>
+                            <th style="width: 30%">Type</th>
+                            <th style="width: 60%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (MotorDto i in Model.Motors)
+                        {
+                            <tr>
+                                <td>@i.Id</td>
+                                <td>@i.Type</td>
+                                <td>
+                                    <a asp-action="GetCarsByMotor" asp-route-Id="@i.Id" class="btn btn-primary btn-sm me-2 mb-1"><i class="bi bi-car-front-fill me-1"></i> Cars</a>
+                                    <a asp-action="EditMotor" asp-route-Id="@i.Id" class="btn btn-warning btn-sm me-2 mb-1"><i class="bi bi-pen me-1"></i> Edit</a>
+                                    <a asp-action="DeleteMotor" asp-route-Id="@i.Id" class="btn btn-danger btn-sm mb-1"><i class="bi bi-trash me-1 ms-1"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+@section Scripts {
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

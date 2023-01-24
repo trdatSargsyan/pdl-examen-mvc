@@ -1,0 +1,56 @@
+﻿@model MVC.Models.AeroportCreationDto
+
+@{
+    ViewData["Title"] = "PostAeroport";
+}
+<link rel="stylesheet" href="~/css/admin.css" />
+
+<div class="container">
+    <h2>Create Aeroport</h2>
+    <form asp-action="PostAeroport">
+        <div class="col-md-8">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" id="aeroportName"/>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control"/>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label asp-for="Phone" class="control-label"></label>
+                    <input asp-for="Phone" class="form-control" id="aeroportPhone"/>
+                    <span asp-validation-for="Phone" class="text-danger" id="spanPhoe"></span>
+                </div>
+                <div class="col-2">
+                    <label asp-for="CountryId" class="control-label"></label>
+                    <input asp-for="CountryId" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="inner">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+            <div class="inner">
+                <a asp-action="GetAeroports" asp-route-id="@Model.CountryId" class="btn btn-secondary"><i class="bi bi-backspace me-1"></i> Back</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

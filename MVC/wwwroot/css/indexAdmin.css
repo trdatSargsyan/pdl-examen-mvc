@@ -1,0 +1,7 @@
+﻿td {
+    margin: 0;
+    color: black;
+}
+tr:hover {
+    background-color: #e7eff7;
+}

@@ -1,0 +1,106 @@
+﻿@model MVC.Models.CarCreationDto
+
+@{
+    ViewData["Title"] = "PostCar";
+}
+<link rel="stylesheet" href="~/css/admin.css" />
+
+<style>
+    .row {
+        margin-bottom: 1rem;
+    }
+</style>
+
+
+<div class="container">
+    <h2>Create Car</h2>
+    <form asp-action="PostCar" enctype="multipart/form-data">
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-2">
+                <div class="form-group">
+                    <label asp-for="Brand" class="control-label"></label>
+                    <input asp-for="Brand" class="form-control" />
+                    <span asp-validation-for="Brand" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="form-group">
+                    <label asp-for="Model" class="control-label"></label>
+                    <input asp-for="Model" class="form-control" />
+                    <span asp-validation-for="Model" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="form-group">
+                    <label asp-for="ProductionDate" class="control-label"></label>
+                    @Html.EditorFor(m =>m.ProductionDate, DateTime.Today.ToString(),
+                    new  { htmlAttributes = new { @class = "form-control" } })
+                    <span asp-validation-for="ProductionDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="form-group">
+                    <label asp-for="Km" class="control-label"></label>
+                    <input asp-for="Km" class="form-control" />
+                    <span asp-validation-for="Km" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="form-group">
+                    <label asp-for="Picture" class="control-label"></label>
+                    <input asp-for="Picture" class="custom-file-input"  type="file" />
+                    <span asp-validation-for="Km" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-2">
+                <div class="form-group">
+                    <label class="control-label">Gearbox</label>
+                    <select asp-for="GearboxId" asp-items="@(new SelectList(Model.GearboxDto,"Id","Type"))" class="form-control">
+                        <option value="">--Select--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="form-group">
+                    <label class="control-label">Type of Car</label>
+                    <select asp-for="TypeOfCarId" asp-items="@(new SelectList(Model.TypeOfCarDto,"TypeOfCarId","Type"))" class="form-control">
+                        <option value="">--Select--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="form-group">
+                    <label class="control-label">Motor</label>
+                    <select asp-for="MotorId" asp-items="@(new SelectList(Model.MotorDtos,"Id","Type"))" class="form-control">
+                        <option value="">--Select--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-2">
+                <label asp-for="Seater" class="control-label"></label>
+                @Html.DropDownListFor(m => m.Seater, Enumerable.Range(2, 9).Select(i =>
+                new SelectListItem { Text = i.ToString(), Value = i.ToString() }),
+                new  { @class="form-control"})
+                <span asp-validation-for="Seater" class="text-danger"></span>
+            </div>        
+        </div>
+
+        <div class="col-md-2">
+            <div class="inner mb-2">
+                    <input type="submit" value="Create" class="btn btn-primary" />                   
+            </div>
+            <div class="inner">
+                <a asp-action="GetCars" asp-route-Id="@Model.AeroportId" class="btn btn-secondary "> <i class="bi bi-backspace"></i> Back</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
+

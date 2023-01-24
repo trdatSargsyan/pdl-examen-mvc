@@ -1,0 +1,31 @@
+#btnDetails {
+    margin-right: 15px;
+}
+
+#btnDetails, #btnCancel {
+    width: 75px;
+}
+
+.col-1 {
+    margin-left: -5px;
+}
+
+.col-1 a {
+/*    width: 100px;
+font-weight: bold;*/
+        font-family: Tahoma, sans-serif;
+        background-color: white;
+        border: 1px solid rgba(54, 54, 54, 0.6);
+        font-weight: 600;
+        position: relative;
+        outline: none;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        height: 40px;
+        width: 100px;
+        opacity: 1;
+    }
+

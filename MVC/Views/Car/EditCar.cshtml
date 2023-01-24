@@ -1,0 +1,108 @@
+﻿@model MVC.Models.CarEditDto
+
+@{
+    ViewData["Title"] = "EditCar";
+}
+<style>
+     img {
+        height:150px;
+    }
+</style>
+
+
+<div class="container">
+    <h2>Edit Car</h2>
+    <form asp-action="EditCar">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Brand" class="control-label"></label>
+                            <input asp-for="Brand" class="form-control" />
+                            <span asp-validation-for="Brand" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Model" class="control-label"></label>
+                            <input asp-for="Model" class="form-control" />
+                            <span asp-validation-for="Model" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="ProductionDate" class="control-label"></label>
+                            @Html.EditorFor(m =>m.ProductionDate, DateTime.Today.ToString(),
+                            new  { htmlAttributes = new { @class = "form-control" } })
+                            <span asp-validation-for="ProductionDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Km" class="control-label"></label>
+                            <input asp-for="Km" class="form-control" />
+                            <span asp-validation-for="Km" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="control-label">Gearbox</label>
+                            <select asp-for="GearboxId" asp-items="@(new SelectList(Model.GearboxDto,"Id","Type"))" class="form-control">
+                                <option value="@Model.GearboxId">--Select</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="control-label">Type of Car</label>
+                            <select asp-for="TypeOfCarId" asp-items="@(new SelectList(Model.TypeOfCarDto,"TypeOfCarId","Type"))" class="form-control">
+                                <option value="@Model.TypeOfCarId">--Select--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="control-label">Motor</label>
+                            <select asp-for="MotorId" asp-items="@(new SelectList(Model.MotorDtos,"Id","Type"))" class="form-control">
+                                <option value="@Model.MotorId">--Select--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label asp-for="Seater" class="control-label"></label>
+                        @Html.DropDownListFor(m => m.Seater, Enumerable.Range(2, 9).Select(i =>
+                        new SelectListItem { Text = i.ToString(), Value = i.ToString() }),
+                        new  { @class="form-control"})
+                        <span asp-validation-for="Seater" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-md-1" style="margin-right:1rem;">
+                        <input type="submit" value="Edit" class="btn btn-primary" />
+                    </div>
+                    <div class="col-1">
+                        <a href='javascript:history.go(-1)' class="btn btn-outline-secondary">Back</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col">
+                         <img src="@Model.Picture" alt="voiture" />
+                        <input asp-for="@Model.Picture" class="custom-file-input" accept="image/*" type="file"/>
+                    </div>                  
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

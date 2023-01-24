@@ -1,0 +1,70 @@
+﻿@model MVC.Models.ReservationCreation
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/reservation.js"></script>
+
+<link rel="stylesheet" href="~/css/card.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+
+<style>
+    .container {
+        text-align: center;
+    }
+    h3 {
+        margin-top:1rem;
+        margin-bottom:1rem;
+    }
+</style>
+
+<body>
+    <div class="container">
+      
+        <form asp-action="Index">
+            <div id="drops">
+               @* <h3>Choose your car</h3>*@
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-md-10" style="margin-left:10px;">
+                    <div class="row ">
+                        <div class="col-md-3">
+                            <label class="control-label ">Pays</label>
+                            @Html.Hidden("CountryURL", Url.Content("~/") + "Client/DisplayAeroports")
+                            <select asp-for="CountryId" asp-items="@(new SelectList(Model.Countries,"Id","Name"))" class="form-control">
+                                <option value="0">Choisir un pays</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label">Aéroports</label>
+                            <select asp-for="AeroportId" class="form-control" id="AeroportId"
+                                    asp-items="@(new SelectList(Model.Aeroports,"AeroportId","Name"))">
+                                <option value="">Choisir un aéroport</option>
+                            </select>
+                        </div>
+                    </div>                   
+                </div>
+                <h3>Lists of cars</h3>
+            </div>
+            @Html.Hidden("CarsURL", Url.Content("~/") + "Client/DisplayCars")
+                <div class="row">
+                    <div id="test">
+                    </div>
+                </div>
+            @Html.Hidden("GetCars", Url.Content("~/") + "Car/GetAllCars/")
+            @Html.Hidden("GetCarsByIdCountry", Url.Content("~/") + "Car/GetCarsByCountry/")
+            @Html.Hidden("CarInfoURL", Url.Content("~/") + "Client/GetCarForResById/")
+            @Html.Hidden("AssignRoleToUser", Url.Content("~/") + "Home/AssignRoleToUser/")
+            @Html.Hidden("GetConfigValue", Url.Content("~/") + "Home/GetConfigValue/")      
+        </form>
+    </div>
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
+
+
+ 

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<MVC.Models.PriceDto>
+
+@{
+    ViewData["Title"] = "GetPrices";
+}
+<style>
+    .addPrice {
+        margin-bottom:1rem;
+    }
+
+    .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+        background-color: #FFDFD3;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <h2>Prices</h2>
+        </div>
+        <div class="col-2">
+            <div class="addPrice">
+                <a asp-action="PostPrice" class="btn btn-primary">Create Price</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <table class="table table-hover" style="color: black; background-color:#D5F3FE">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Price/Day</th>
+                        <th>Price/Week</th>
+                        <th>Car Id</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var i in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => i.FormulePriceId)</td>
+                            <td>@Html.DisplayFor(modelItem => i.PriceDay)</td>
+                            <td>@Html.DisplayFor(modelItem => i.PriceWeek)</td>
+                            <td>@Html.DisplayFor(modelItem => i.CarId)</td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditPrice", new {  id=i.FormulePriceId  },new {@class="btn btn-warning "})
+                                @Html.ActionLink("Delete", "DeletePrice",
+                                    new {  id=i.FormulePriceId  },
+                                    new { onclick = "return confirm('Are sure wants to delete?');", @class="btn btn-danger ml-2" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

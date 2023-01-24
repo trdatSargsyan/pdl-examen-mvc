@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MVC.Models.CarDto>
+
+@{
+    ViewData["Title"] = "GetCarsByMotor";
+}
+<div class="container">
+    <h2>Cars By Motor</h2>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Brand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductionDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Km)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Seater)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Model)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductionDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Km)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Seater)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MVC.Models.ReservationUI>
+
+@{
+    ViewData["Title"] = "GetReservtions";
+}
+
+
+<div class="container">
+    <h3>Reservtions</h3>
+
+
+    <table class="table table-sm table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Id Car</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Solde</th>
+            @*    <th></th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.ReservationId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.Start_Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.End_Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.CarId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.Brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.Model)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.Solde) $
+                    </td>
+@*                    <td>
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) 
+                    </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+

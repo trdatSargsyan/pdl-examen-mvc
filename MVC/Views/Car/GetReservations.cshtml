@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MVC.Models.ReservationsForAdminUI>
+
+@{
+    ViewData["Title"] = "GetReservations";
+}
+
+
+<div class="container">
+    <h3>Reservations</h3>
+
+    <table class="table  table-bordered" style="background-color:#D3D3D3">
+        <thead>
+            <tr>
+                <th>Reservation Id</th>
+                <th>User Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Solde</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.ReservationId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.UserId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Start_Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.End_Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Solde) $
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

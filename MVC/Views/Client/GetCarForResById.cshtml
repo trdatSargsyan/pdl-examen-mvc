@@ -1,0 +1,101 @@
+﻿@model MVC.Models.ReservationDetailsDto
+
+@{
+    ViewData["Title"] = "GetCarForResById";
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/price.js"></script>
+<link rel="stylesheet" href="~/css/carForRes.css" />
+
+<div class="container">
+    <div class="row">
+        <h4>@Html.DisplayFor(i => i.Brand)  @Html.DisplayFor(i => i.Model) @Html.DisplayFor(i => i.ProductionDate)</h4>
+        <div class="col-4 pt-3">
+            <input type="hidden" value="@Model.Id" readonly id="carId" />
+
+            <div class="pt-2 pb-2">
+                <div class="row">
+                    <div class="col">
+                        <label class="control-label">Start Date</label>
+                        <input class="form-control" id="Startdate">
+                    </div>
+                    <div class="col">
+                        <label class="control-label">End Date</label>
+                        <input class="form-control" id="Enddate">
+                    </div>
+                </div>
+            </div>
+            <div class=" pb-2">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="@Model.PriceDto.PriceDay" id="day">
+                            <label class="form-check-label">@Html.DisplayFor(i => i.PriceDto.PriceDay) $/jour</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="@Model.PriceDto.PriceWeek" id="week">
+                            <label class="form-check-label">@Html.DisplayFor(i => i.PriceDto.PriceWeek) $/semaine</label>
+                        </div>
+                    </div>
+                </div>
+
+                Total :$ <span class="text-danger text-uppercase" id="selectPrice"> Choisir un forfait</span>
+                <div  class="col-4">                  
+                    <input asp-for="Amount" class="form-control" id="totalAmount" name="amount" readonly />
+                </div>
+            </div>
+
+            <div>
+                @Html.Hidden("GetCarsResDates",Url.Content("~/") + "Car/GetCarsResDates")
+                @Html.Hidden("postReservationUrl", Url.Content("~/") + "Client/PostReservationDetails")
+                @Html.Hidden("postCreditCard", Url.Content("~/") + "Client/PostCreditCard")
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <input type="submit" value="Reservation" id="saveReservation" class="btn btn-primary btn-sm" disabled />
+                    <a asp-action="Index"  class="btn btn-secondary btn-sm">Back</a>
+                }
+                else
+                {
+                    <input type="button" value="Reserver" class="btn btn-primary btn-sm" disabled />
+                    <a asp-action="Index" class="btn btn-secondary btn-sm">Back</a>
+                    <div class="pt-2">
+                        <div class="alert alert-danger" role="alert">
+                            You didn't logged in !
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+        <div class="col-4 pt-3">
+            <div class="form-check">
+                <label class="form-check-label">Boite : @Html.DisplayFor(i=>i.GearboxDto.Type)</label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">Moteur : @Html.DisplayFor(i=>i.MotorDto.Type)</label>
+            </div>            
+            <div class="form-check">
+                <label class="form-check-label">Kilométrage : @Html.DisplayFor(i=>i.Km) Km</label>
+            </div>            
+            <div class="form-check">
+                <label class="form-check-label">Nombre de places : @Html.DisplayFor(i=>i.Seater)</label>
+            </div>
+        </div>
+        <div class="col-4 pt-3">
+
+        </div>
+    </div>
+
+
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

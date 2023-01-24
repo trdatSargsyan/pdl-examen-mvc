@@ -1,0 +1,80 @@
+﻿@model MVC.Models.Client
+
+@{
+    ViewData["Title"] = "GetMyInfo";
+}
+<link rel="stylesheet" href="~/css/getMyInfo.css" />
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <h4>Client</h4>
+        </div>
+        <div class="col-1">           
+            <a asp-action="EditClient" asp-controller="Client" asp-route-UserId="@Model.UserId" class="btn btn-warning">Edit</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Phone)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Phone)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.UserId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.UserId)
+            </dd>
+        </dl>
+    </div>
+    @Html.Hidden("getResForUserUi", Url.Content("~/") + "Client/GetReservationsForUserUi")
+    <div class="row">
+        <div class="col-8">
+            <table class="table table-hover  table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">Solde</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                @Html.Hidden("cancelReservation", Url.Content("~/") + "Client/CancelReservation")
+                <tbody id="resTable">
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/getMyInfo.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

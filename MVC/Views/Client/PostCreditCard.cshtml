@@ -1,0 +1,121 @@
+﻿@model MVC.Models.CreditCard
+
+@{
+    ViewData["Title"] = "PostCreditCard";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/creditCard.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/CreditCard.js"></script>
+@*
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/121761/jquery.card.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/121761/card.js"></script>*@
+</head>
+
+
+<div class="container">
+    <h3>Credit Card</h3>
+    <div class="row">
+        <div class="col-6">
+            <form asp-action="PostCreditCard">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+               
+                <div class="row">
+                    <div class="col">
+                        <div class="form-outline">
+                            <label asp-for="FirstName" class="control-label" ></label>
+                            <input asp-for="FirstName" class="form-control"  placeholder="First Name" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control"placeholder="Last Name" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="CardType" class="control-label"></label>
+                            <select asp-for="CardType" asp-items="Html.GetEnumSelectList<CardType>()" class="form-control" id="sType">
+                            </select>
+                            <span asp-validation-for="CardType" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="CardNumber" class="control-label"></label>
+                            <input asp-for="CardNumber" class="form-control"  placeholder="Card Number" id="ccNumber" />
+                            <span id="ccError"></span>
+                            <span asp-validation-for="CardNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="CVV" class="control-label"></label>
+                            <input asp-for="CVV" class="form-control"  placeholder="CCV" id="ccv" />
+                            <span id="ccvError"></span>
+                            <span asp-validation-for="CVV" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Amount" class="control-label"></label>
+                            <input asp-for="Amount" class="form-control" readonly />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="DateValid" class="control-label"></label>
+                            @Html.EditorFor(x => x.DateValid, DateTime.Today.ToString(),
+                            new  { htmlAttributes = new { @class = "form-control"
+                            } })
+                            <span asp-validation-for="DateValid" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-1 me-3">
+                        <div class="form-group">
+                            <input type="submit" value="Pay" class="btn btn-primary btn-sm"  id="payButton"/>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <a asp-action="GetCarForResById" asp-route-Id="@Model.CarId" class="btn btn-secondary btn-sm">Back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4">
+            <div class="card-wrapper">
+            </div>
+        </div>
+    </div>
+
+    <div>
+    </div>
+</div>
+
+@*<script>
+    $('form').card({
+        container: '.card-wrapper',
+        width: 280,
+
+        formSelectors: {
+            nameInput: 'input[name="first-name"], input[name="last-name"]'
+        }
+    });
+</script>*@
+
+
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
